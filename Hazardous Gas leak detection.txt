@@ -1,0 +1,69 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(8, 9, 10, 11, 12, 13);
+
+int
+  Gas_Sensor_Value = 0;
+int Gas_sensor = A0;
+int Piezo = 3;
+int electric_motor_1
+  = 4 ;
+int electric_motor_2 = 5 ;
+int electric_motor_3 = 6 ;
+int electric_motor_4
+  = 7 ;
+
+
+ 
+
+void setup() 
+{
+  lcd.begin(16, 2); // set up the
+  LCD's number of columns and rows:
+  pinMode(Gas_sensor, INPUT);
+  pinMode(Piezo,
+  OUTPUT);
+  pinMode(electric_motor_1, OUTPUT);
+  pinMode(electric_motor_2,
+  OUTPUT);
+  pinMode(electric_motor_3, OUTPUT);
+  pinMode(electric_motor_4,
+  OUTPUT);
+}
+void loop() 
+{
+   lcd.clear();
+   Gas_Sensor_Value = analogRead(A0);
+
+
+   if( Gas_Sensor_Value >= 700)
+   {
+    digitalWrite(Piezo, HIGH);
+    digitalWrite(electric_motor_1,
+  HIGH);
+    digitalWrite(electric_motor_2, HIGH);
+    digitalWrite(electric_motor_3,
+  HIGH);
+    digitalWrite(electric_motor_4, HIGH);
+    lcd.print("Caution:Gas
+  leak"); // Print a message to the LCD.
+     
+   delay(1000);
+   }
+
+  else
+  {
+   digitalWrite(Piezo, LOW);
+   digitalWrite(electric_motor_1,
+  LOW);
+   digitalWrite(electric_motor_2, LOW);
+   digitalWrite(electric_motor_3,
+  LOW);
+   digitalWrite(electric_motor_4, LOW);
+   lcd.print("The environment");
+  // Print a message to the LCD.
+   lcd.setCursor(0,1); 
+   lcd.print("is Safe");
+  
+    delay(1000);
+  }
+  }
